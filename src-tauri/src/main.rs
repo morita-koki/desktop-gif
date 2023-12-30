@@ -8,7 +8,12 @@
 // }
 
 #[tauri::command]
-fn open_config_window() -> String {
+async fn open_config_window(handle: tauri::AppHandle) -> String {
+    let _config_window = tauri::WindowBuilder::new(
+        &handle,
+        "config_window",
+        tauri::WindowUrl::App("config.html".into())
+    ).build().unwrap();
     format!("open_config_window() called!")
 }
 
