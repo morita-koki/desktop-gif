@@ -5,7 +5,7 @@ import "./styles.css";
 // import { invoke } from "@tauri-apps/api";
 import { open } from "@tauri-apps/api/dialog";
 // import { appLocalDataDir, appDataDir } from "@tauri-apps/api/path";
-import { copyFile, readDir, BaseDirectory, writeBinaryFile, readBinaryFile } from "@tauri-apps/api/fs";
+import { readDir, BaseDirectory, writeBinaryFile, readBinaryFile } from "@tauri-apps/api/fs";
 
 const getNewFilename = async () => {
     const entries = await readDir("", { dir: BaseDirectory.AppLocalData, recursive: false });

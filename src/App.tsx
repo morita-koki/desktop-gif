@@ -26,9 +26,9 @@ const GifViewer = ({path}: {path: string}) => {
 
 const SettingButton = ({setConfig}: {setConfig: (func: (prev: boolean) => boolean) => void}) => {
   return(
-    <button onClick={() => setConfig(prev => !prev)}>
-      <img src={settingIcon} alt="setting icon"/>
-    </button>
+    <>
+      <img onClick={() => setConfig(prev => !prev)} src={settingIcon} alt="setting icon" height="20vh"/>
+    </>
   )
 }
 
