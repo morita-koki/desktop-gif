@@ -3,7 +3,8 @@
     "beforeDevCommand": "yarn dev",
     "beforeBuildCommand": "yarn build",
     "devPath": "http://localhost:1420",
-    "distDir": "../dist"
+    "distDir": "../dist",
+    "withGlobalTauri": true
   },
   "package": {
     "productName": "tauri-test",
@@ -14,6 +15,30 @@
       "all": false,
       "window": {
         "startDragging": true
+      },
+      "dialog": {
+        "all": true,
+        "ask": true,
+        "confirm": true,
+        "message": true, 
+        "open": true, 
+        "save": true 
+      },
+      "fs": {
+        "all": true,
+        "scope": ["$APPLOCALDATA/*", "/Users/koki/Library/Application Support/com.tauri.dev"],
+        "readFile": true,
+        "writeFile": true,
+        "readDir": true,
+        "copyFile": true,
+        "createDir": true,
+        "removeDir": true,
+        "removeFile": true,
+        "renameFile": true,
+        "exists": true
+      },
+      "path": {
+        "all": true
       },
       "shell": {
         "all": false,

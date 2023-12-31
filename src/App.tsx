@@ -1,20 +1,53 @@
-// import { useState } from "react";
+import { useState } from "react";
 // import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/tauri";
+// import { invoke } from "@tauri-apps/api/tauri";
 import "./App.css";
 
-// import { appWindow }  from "@tauri-apps/api/window"
-import confuseDog from "./assets/confuse.gif"
+import Config from "./config";
 
-const click_handler = () => {
-  invoke("open_config_window").then(msg => console.log(msg));
-  console.log("click_handler() called");
+// import { appWindow }  from "@tauri-apps/api/window"
+import confuseDog from "./assets/confuse.gif";
+import settingIcon from "./assets/setting_icon.svg";
+
+// const click_handler = () => {
+//   // invoke("open_config_window").then(msg => console.log(msg));
+//   console.log("click_handler() called");
+// }
+
+const GifViewer = ({path}: {path: string}) => {
+  return (
+    <img data-tauri-drag-region
+         src={path} 
+         alt="confused dog gif" 
+         width="100vw" 
+         height="100vh"/>
+  )
 }
 
-function App() {
+const SettingButton = ({setConfig}: {setConfig: (func: (prev: boolean) => boolean) => void}) => {
+  return(
+    <button onClick={() => setConfig(prev => !prev)}>
+      <img src={settingIcon} alt="setting icon"/>
+    </button>
+  )
+}
+
+
+const App = () => {
+
+  const [config, setConfig] = useState<boolean>(false);
+  const [gifPath, setGifPath] = useState<string>(confuseDog);
+  // const [isLocked, setIsLocked] = useState<boolean>(true);
+  
   return (
-    <div onClick={click_handler} data-tauri-drag-region className="container">
-      <img data-tauri-drag-region src={confuseDog} alt="confused dog gif" width="100vw" height="100vh"/>
+    <div>
+      <SettingButton setConfig={setConfig} />
+      {config 
+        ? <Config />
+        : <div data-tauri-drag-region className="container">
+            <GifViewer path={gifPath}/>
+          </div> 
+      }
     </div>
   );
 }
