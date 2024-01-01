@@ -26,9 +26,9 @@ const GifViewer = ({path}: {path: string}) => {
 
 const SettingButton = ({setConfig}: {setConfig: (func: (prev: boolean) => boolean) => void}) => {
   return(
-    <>
+    <div style={{position: "absolute", top: "3px", right: "3px"}}>
       <img onClick={() => setConfig(prev => !prev)} src={settingIcon} alt="setting icon" height="20vh"/>
-    </>
+    </div>
   )
 }
 
@@ -40,7 +40,7 @@ const App = () => {
   // const [isLocked, setIsLocked] = useState<boolean>(true);
   
   return (
-    <div>
+    <div style={{position: "relative"}}>
       <SettingButton setConfig={setConfig} />
       {config 
         ? <Config />
