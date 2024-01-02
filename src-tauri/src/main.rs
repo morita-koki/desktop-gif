@@ -1,11 +1,5 @@
-// Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-// #[tauri::command]
-// fn greet(name: &str) -> String {
-//     format!("Hello, {}! You've been greeted from Rust!", name)
-// }
 
 use tauri::Manager;
 
@@ -34,9 +28,10 @@ struct Message {
 
 #[tauri::command]
 async fn gif_path_to_main_window(handle: tauri::AppHandle, message: Message) -> Result<String, String> {
+    // (config windowから受け取った)gif pathをmain windowに送る
     let main_window = handle.get_window("main").unwrap();
     main_window.emit("gif_path", Payload{selected_gif_path: message.path.into()}).unwrap();
-    
+
     Ok("gif_filename_to_main() finished successfully.".into())
 }
 

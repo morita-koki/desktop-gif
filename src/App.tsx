@@ -7,14 +7,12 @@ import { resolve } from "@tauri-apps/api/path";
 import { convertFileSrc } from "@tauri-apps/api/tauri";
 import "./App.css";
 
-
-// import { appWindow }  from "@tauri-apps/api/window"
 import confuseDog from "/Users/koki/Library/Application Support/com.tauri.dev/image_0.gif";
 import settingIcon from "./assets/setting_icon.svg";
 
 
 type GifViewerType = {
-  path: string
+  path: string;
 }
 
 const GifViewer: React.FC<GifViewerType> = ({path}) => {
@@ -28,7 +26,7 @@ const GifViewer: React.FC<GifViewerType> = ({path}) => {
 }
 
 type SettingButtonType = {
-  openConfig: () => {}
+  openConfig: () => {};
 }
 
 const SettingButton: React.FC<SettingButtonType> = ({openConfig}) => {
@@ -38,7 +36,6 @@ const SettingButton: React.FC<SettingButtonType> = ({openConfig}) => {
     </div>
   )
 }
-
 
 type CommandGifPathEvent = {
   event: string;
@@ -55,8 +52,10 @@ const App = () => {
 
   const openConfig = async () => {
     await invoke("open_config_window");
-  }
+  };
 
+  // "gif_path"経由でMessageを受けるlistenは一度だけ呼んでほしいから
+  // useEffectを使う
   useEffect(() => {
     let unlisten: any;
     
@@ -74,7 +73,8 @@ const App = () => {
       if (unlisten) unlisten();
     };
   }, [])
-  
+
+
   return (
     <div style={{position: "relative"}}>
       <SettingButton openConfig={openConfig} />

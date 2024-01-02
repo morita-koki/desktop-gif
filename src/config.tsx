@@ -4,10 +4,12 @@ import "./styles.css";
 
 import { invoke } from "@tauri-apps/api";
 import { open } from "@tauri-apps/api/dialog";
-import { appLocalDataDir, appDataDir } from "@tauri-apps/api/path";
+import { appLocalDataDir } from "@tauri-apps/api/path";
 import { readDir, BaseDirectory, writeBinaryFile, readBinaryFile } from "@tauri-apps/api/fs";
 
+
 const getNewFilename = async () => {
+    // AppLocalDataDir内の画像数をカウントしてその数をsuffixをつけてファイル名を返す
     const entries = await readDir("", { dir: BaseDirectory.AppLocalData, recursive: false });
     let count = 0;
     for (const entry of entries) {
@@ -49,10 +51,9 @@ const Config: React.FC = () => {
     )
 }
 
-export default Config;
 
 ReactDOM.createRoot(document.getElementById("config") as HTMLElement).render(
   <React.StrictMode>
     <Config />
-  </React.StrictMode>,
+  </React.StrictMode>
 );
