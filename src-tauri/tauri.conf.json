@@ -13,6 +13,14 @@
   "tauri": {
     "allowlist": {
       "all": false,
+      "protocol": {
+        "asset": true,
+        "assetScope": [
+          "$APPCACHE/**",
+          "$RESOURCE/**",
+          "$APPLOCALDATA/**"
+        ]
+      },
       "window": {
         "startDragging": true
       },
@@ -26,7 +34,7 @@
       },
       "fs": {
         "all": true,
-        "scope": ["$APPLOCALDATA/*", "/Users/koki/Library/Application Support/com.tauri.dev"],
+        "scope": ["$APPLOCALDATA/*", "/Users/koki/Library/Application Support/com.tauri.dev", "/Users/koki/Library/Application Support/com.tauri.dev/*"],
         "readFile": true,
         "writeFile": true,
         "readDir": true,
@@ -58,7 +66,7 @@
       ]
     },
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; img-src 'self' asset: https://asset.localhost"
     },
     "windows": [
       {
