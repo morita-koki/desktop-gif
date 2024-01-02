@@ -14,11 +14,11 @@ import confuseDog from "/Users/koki/Library/Application Support/com.tauri.dev/im
 import settingIcon from "./assets/setting_icon.svg";
 
 
-type GifViewerType = {
+type MainGifViewerType = {
   path: string;
 }
 
-const GifViewer: React.FC<GifViewerType> = ({path}) => {
+const MainGifViewer: React.FC<MainGifViewerType> = ({path}) => {
   return (
     <img data-tauri-drag-region
          src={path} 
@@ -82,7 +82,7 @@ const App = () => {
     <div style={{position: "relative"}}>
       <SettingButton openConfig={openConfig} />
       <div data-tauri-drag-region className="container">
-        <GifViewer path={gifPath}/>
+        <MainGifViewer path={gifPath}/>
       </div>
     </div>
   );
