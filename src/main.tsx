@@ -66,8 +66,9 @@ const App = () => {
       const app_local_data_dir = await appLocalDataDir();
       unlisten = await listen("gif_path", async (event: CommandGifPathEvent) => {
         if (event?.payload?.selected_gif_path) {
-          const gif_path = await resolve(app_local_data_dir, event.payload.selected_gif_path)
-          setGifPath(convertFileSrc(gif_path));
+          // const gif_path = await resolve(app_local_data_dir, )
+          // console.log(gif_path);
+          setGifPath(event.payload.selected_gif_path);
         }
       })
     }) ();
