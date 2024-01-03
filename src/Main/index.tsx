@@ -8,7 +8,7 @@ import { invoke } from "@tauri-apps/api/tauri";
 import { listen } from "@tauri-apps/api/event";
 
 import confuseDog from "/Users/koki/Library/Application Support/com.tauri.dev/image_0.gif";
-import settingIcon from "./assets/setting_icon.svg";
+import settingIcon from "../assets/setting_icon.svg";
 
 
 type MainGifViewerType = {

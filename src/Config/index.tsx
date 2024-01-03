@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useCallback } from "react";
 import ReactDOM from "react-dom/client";
-import "./styles.css";
+// import "./styles.css";
 
 import { invoke } from "@tauri-apps/api";
 import { open } from "@tauri-apps/api/dialog";
