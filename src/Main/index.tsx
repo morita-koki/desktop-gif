@@ -1,21 +1,21 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./styles.css";
+
 import { useState } from "react";
 import { useEffect } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import { listen } from "@tauri-apps/api/event";
-import { appLocalDataDir } from "@tauri-apps/api/path";
-import { resolve } from "@tauri-apps/api/path";
-import { convertFileSrc } from "@tauri-apps/api/tauri";
-import "./App.css";
 
 import confuseDog from "/Users/koki/Library/Application Support/com.tauri.dev/image_0.gif";
-import settingIcon from "./assets/setting_icon.svg";
+import settingIcon from "../assets/setting_icon.svg";
 
 
-type GifViewerType = {
+type MainGifViewerType = {
   path: string;
 }
 
-const GifViewer: React.FC<GifViewerType> = ({path}) => {
+const MainGifViewer: React.FC<MainGifViewerType> = ({path}) => {
   return (
     <img data-tauri-drag-region
          src={path} 
@@ -60,11 +60,9 @@ const App = () => {
     let unlisten: any;
     
     (async () => {
-      const app_local_data_dir = await appLocalDataDir();
       unlisten = await listen("gif_path", async (event: CommandGifPathEvent) => {
         if (event?.payload?.selected_gif_path) {
-          const gif_path = await resolve(app_local_data_dir, event.payload.selected_gif_path)
-          setGifPath(convertFileSrc(gif_path));
+          setGifPath(event.payload.selected_gif_path);
         }
       })
     }) ();
@@ -79,10 +77,14 @@ const App = () => {
     <div style={{position: "relative"}}>
       <SettingButton openConfig={openConfig} />
       <div data-tauri-drag-region className="container">
-        <GifViewer path={gifPath}/>
+        <MainGifViewer path={gifPath}/>
       </div>
     </div>
   );
 }
 
-export default App;
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
