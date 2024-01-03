@@ -6,9 +6,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import { listen } from "@tauri-apps/api/event";
-import { appLocalDataDir } from "@tauri-apps/api/path";
-import { resolve } from "@tauri-apps/api/path";
-import { convertFileSrc } from "@tauri-apps/api/tauri";
 
 import confuseDog from "/Users/koki/Library/Application Support/com.tauri.dev/image_0.gif";
 import settingIcon from "./assets/setting_icon.svg";
@@ -63,11 +60,8 @@ const App = () => {
     let unlisten: any;
     
     (async () => {
-      const app_local_data_dir = await appLocalDataDir();
       unlisten = await listen("gif_path", async (event: CommandGifPathEvent) => {
         if (event?.payload?.selected_gif_path) {
-          // const gif_path = await resolve(app_local_data_dir, )
-          // console.log(gif_path);
           setGifPath(event.payload.selected_gif_path);
         }
       })
