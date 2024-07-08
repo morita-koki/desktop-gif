@@ -2,6 +2,7 @@
 
 
 use tauri::Manager;
+mod menu;
 
 #[derive(Clone, serde::Serialize)]
 struct Payload {
@@ -37,6 +38,8 @@ async fn gif_path_to_main_window(handle: tauri::AppHandle, message: Message) -> 
 
 fn main() {
     tauri::Builder::default()
+        .menu(menu::app_menu())
+        .on_menu_event(menu::menu_event_handler)
         .invoke_handler(tauri::generate_handler![ 
             open_config_window,
             gif_path_to_main_window
