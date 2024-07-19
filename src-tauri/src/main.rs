@@ -10,18 +10,6 @@ struct Payload {
 }
 
 
-#[tauri::command]
-async fn open_config_window(handle: tauri::AppHandle) -> Result<String, String> {
-    // Config Windowを表示
-    let _config_window = tauri::WindowBuilder::new(
-        &handle,
-        "config_window",
-        tauri::WindowUrl::App("config.html".into())
-    ).build().unwrap();
-
-    Ok("open_config_window() called successfuly.".into())
-}
-
 #[derive(Clone, serde::Deserialize, serde::Serialize)]
 struct Message {
     path: String
@@ -41,7 +29,6 @@ fn main() {
         .menu(menu::app_menu())
         .on_menu_event(menu::menu_event_handler)
         .invoke_handler(tauri::generate_handler![ 
-            open_config_window,
             gif_path_to_main_window
         ])
         .run(tauri::generate_context!())

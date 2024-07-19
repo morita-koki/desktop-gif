@@ -70,9 +70,11 @@
     },
     "windows": [
       {
+        "label": "GifAn",
+        "title": "GifAn",
+        "url": "window/index.html",
         "fullscreen": false,
         "resizable": true,
-        "title": "tauri-test",
         "width": 160,
         "height": 250,
         "transparent": true,
